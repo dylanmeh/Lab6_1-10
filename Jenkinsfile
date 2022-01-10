@@ -30,4 +30,3 @@ podTemplate(containers: [
         }        
     }
 }
-
