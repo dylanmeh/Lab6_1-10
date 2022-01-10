@@ -1,3 +1,4 @@
+@Library("lab3") _ 
 properties([pipelineTriggers([eventTrigger(jmespathQuery("environment=='prod'"))])])
 podTemplate(containers: [
     containerTemplate(name: 'maven', image: 'maven:3.8.1-jdk-11', command: 'sleep', args: '99d')
