@@ -24,7 +24,6 @@ podTemplate(containers: [
             container('maven') {
                 stage('deploy') {
                     echo 'deploy to artifact repo'
-
                 }
             }
         }        
