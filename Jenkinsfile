@@ -3,17 +3,27 @@ podTemplate(containers: [
 ]) {
     node(POD_LABEL) {
         stage('build') {
-            container('maven')
-            echo 'Build code'
-        }
+            container('maven') {
+                stage('build') {
+                    echo 'Build code'
+                }
+            }    
+        }        
         stage('test') {
-            container('maven')
-            echo 'unit tests'
-        }
+            container('maven') {
+                stage('test') {
+                     echo 'unit tests'
+                }
+            }    
+        }    
         stage('deploy') {
-            container('maven')
-            echo 'deploy to artifact repo'
-        }
+            container('maven') {
+                stage('deploy') {
+                    echo 'deploy to artifact repo'
+
+                }
+            }
+        }        
     }
 }
 
