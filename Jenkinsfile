@@ -6,7 +6,9 @@ podTemplate(containers: [
         stage('first conditional stage') {
             container('maven') {
                 stage('enable unit testing when event is prod') {
-                    echo 'build'
+                    if (getTriggerCauseEvent.getTriggerCauseEvent()) == 'prod')
+                        println 'enabling unit testing' 
+                    }    
                 }
             }    
         }        
