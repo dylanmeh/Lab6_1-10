@@ -1,16 +1,7 @@
-podTemplate(yaml: '''
-    apiVersion: v1
-    kind: Pod
-    spec:
-        containers:
-        - name: build
-        image: maven:3.8.1-jdk-11
-        command:
-        - cat
-        args:
-        - 99d
-''') {
-    node('POD_LABEL') {
+podTemplate(inheritFrom: 'build', containers: [
+    containerTemplate(name: 'build', image: 'maven:3.8.1-jdk-11')
+]) {
+    node(POD_LABEL) {
         stage('build') {
             echo 'Build code'
         }
