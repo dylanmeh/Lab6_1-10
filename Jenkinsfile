@@ -9,8 +9,8 @@ podTemplate(containers: [
                 stage('enable unit testing when event is prod') {
                     if (getTriggerCauseEvent.getTriggerCauseEvent() == 'prod')
                         println 'enabling unit testing' 
-                    }
-                    else {
+                    
+                    } else {
                         echo 'N/A'
                     }    
                 }
