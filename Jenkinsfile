@@ -12,10 +12,11 @@ podTemplate(containers: [
                 }
             }    
         }        
-        stage('test') {
+        stage('second conditional stage') {
             container('maven') {
-                stage('test') {
-                    echo 'unit tests'
+                stage('disable unit testing when event is dev') {
+                    if (getTriggerCauseEvent.getTriggerCauseEvent() == 'dev')
+                        println 'user disabled unit testing'
                 }
             }    
         }    
