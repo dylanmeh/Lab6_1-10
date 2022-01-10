@@ -3,10 +3,13 @@ podTemplate(containers: [
     containerTemplate(name: 'maven', image: 'maven:3.8.1-jdk-11', command: 'sleep', args: '99d')
 ]) {
     node(POD_LABEL) {
-        stage('build') {
+        stage('first conditional stage') {
             container('maven') {
-                stage('build') {
-                    sh 'mvn --version' 
+                stage('enable unit testing when event is prod') {
+                    if (getTriggerCauseEvent.getTriggerCauseEvent() == 'prod')
+                    echo 'enabling unit testing'
+                    }
+                    return "N/A" 
                 }
             }    
         }        
