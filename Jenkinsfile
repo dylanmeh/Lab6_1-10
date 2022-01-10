@@ -5,7 +5,7 @@ podTemplate(containers: [
         stage('build') {
             container('maven') {
                 stage('build') {
-                    echo 'Build code'
+                    sh 'mvn --version' 
                 }
             }    
         }        
