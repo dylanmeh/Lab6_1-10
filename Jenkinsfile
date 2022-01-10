@@ -1,4 +1,4 @@
-properties([pipelineTriggers([eventTrigger(jmespathQuery("environment=='prod'"))]))])
+properties([pipelineTriggers([eventTrigger(jmespathQuery("environment=='prod'"))])])
 podTemplate(containers: [
     containerTemplate(name: 'maven', image: 'maven:3.8.1-jdk-11', command: 'sleep', args: '99d')
 ]) {
