@@ -1,5 +1,5 @@
 @Library("lab3") _ 
-properties([pipelineTriggers([eventTrigger(jmespathQuery("environment=='prod'"))])])
+properties([pipelineTriggers([eventTrigger(jmespathQuery("unitTestEnable=='true' || unitTestEnable=='false'"))])])
 podTemplate(containers: [
     containerTemplate(name: 'maven', image: 'maven:3.8.1-jdk-11', command: 'sleep', args: '99d')
 ]) {
@@ -7,7 +7,8 @@ podTemplate(containers: [
         stage('first conditional stage') {
             container('maven') {
                 stage('enable unit testing when event is prod') {
-                    if (getTriggerCauseEvent.getTriggerCauseEvent() == 'prod')
+                    String conditionalfunction() {
+                    if (getTriggerCauseEvent.getTriggerCauseEvent() == 'true')
                         println 'enabling unit testing'    
                 }
             }    
@@ -15,7 +16,7 @@ podTemplate(containers: [
         stage('second conditional stage') {
             container('maven') {
                 stage('disable unit testing when event is dev') {
-                    if (getTriggerCauseEvent.getTriggerCauseEvent() == 'dev')
+                    if (getTriggerCauseEvent.getTriggerCauseEvent() == 'false')
                         println 'user disabled unit testing'
                 }
             }    
