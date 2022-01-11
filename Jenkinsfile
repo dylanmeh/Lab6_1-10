@@ -64,7 +64,7 @@ podTemplate(containers: [
             }
         }
         stage('email notification') {
-            if (currentBuild.currentResult) 
+            if (currentBuild.currentResult) {
                 buildResultsEmail("Successful")
             } else {
                 buildResultsEmail("Failure")
