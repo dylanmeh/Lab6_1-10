@@ -35,7 +35,9 @@ podTemplate(containers: [
             container('maven') {
                 stage('build') {
                     sh '''
-                    mkdir pom.xml
+                    mkdir ~/git
+                    cd ~/git
+                    git clone https://github.com/dylanmeh/Lab2_Java-App.git
                     mvn -B -DskipTests clean package'
                     '''
                 }
