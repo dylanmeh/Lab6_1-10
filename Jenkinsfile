@@ -20,12 +20,46 @@ podTemplate(containers: [
                 }
             }    
         }    
-        stage('deploy') {
+        stage('buildstart') {
             container('maven') {
-                stage('deploy') {
-                    echo 'deploy to artifact repo'
+                stage('buildStart Time Stage') {
+                    buildStart()
+                }
+            }
+        }
+        stage('build') {
+            container('maven') {
+                stage('build') {
+                    sh 'mvn -B -DskipTests clean package'
                 }
             }
         }        
+        stage('test') {
+            container('maven') {
+                stage('test') {
+                    sh 'mvn test'
+                }
+                post {
+                    always {
+                        junit 'target/surefire-reports/*.xml'
+                    }
+                }
+            }
+        }
+        stage('deploy') {
+            container('maven') {
+                stage('deploy') {
+                    sh './scripts/deliver.sh'
+                }           
+            }
+        }
+        post {
+            success {
+                buildResultsEmail("Successful")
+            }
+            failure {
+                buildResultsEmail("Failure")
+            }
+        }
     }
 }
