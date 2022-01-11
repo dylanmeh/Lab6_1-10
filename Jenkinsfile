@@ -33,13 +33,9 @@ podTemplate(containers: [
         }
         stage('build') {
             container('maven') {
+                git 'https://github.com/dylanmeh/Lab2_Java-App.git'
                 stage('build') {
-                    sh '''
-                    mkdir ~/git
-                    cd ~/git
-                    git clone https://github.com/dylanmeh/Lab2_Java-App.git
-                    mvn -B -DskipTests clean package
-                    '''
+                    sh 'mvn -B -DskipTests clean package'
                 }
             }
         }        
