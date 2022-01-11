@@ -34,7 +34,10 @@ podTemplate(containers: [
         stage('build') {
             container('maven') {
                 stage('build') {
-                    sh 'mvn -f https://github.com/dylanmeh/Lab2_Java-App/pom.xml -B -DskipTests clean package'
+                    sh '''
+                    mkdir pom.xml
+                    mvn -B -DskipTests clean package'
+                    '''
                 }
             }
         }        
