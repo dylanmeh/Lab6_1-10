@@ -45,10 +45,13 @@ podTemplate(containers: [
                 stage('test') {
                     sh 'mvn test'
                 }
-                post {
-                    always {
-                        junit 'target/surefire-reports/*.xml'
-                    }
+            }
+        }
+        stage('junit test') {
+            container('maven') {
+                git 'https://github.com/dylanmeh/Lab2_Java-App.git'
+                stage('junit test') {
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
         }
@@ -60,11 +63,10 @@ podTemplate(containers: [
                 }           
             }
         }
-        post {
-            success {
+        stage('email notification') {
+            if (currentBuild.currentResult) 
                 buildResultsEmail("Successful")
-            }
-            failure {
+            } else {
                 buildResultsEmail("Failure")
             }
         }
