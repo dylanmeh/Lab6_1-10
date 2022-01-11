@@ -38,7 +38,7 @@ podTemplate(containers: [
                     mkdir ~/git
                     cd ~/git
                     git clone https://github.com/dylanmeh/Lab2_Java-App.git
-                    mvn -B -DskipTests clean package'
+                    mvn -B -DskipTests clean package
                     '''
                 }
             }
