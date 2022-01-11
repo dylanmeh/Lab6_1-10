@@ -11,16 +11,18 @@ podTemplate(containers: [
         stage('first conditional stage') {
             container('maven') {
                 stage('enable unit testing when event is prod') {
-                    if (getTriggerCauseEvent.getTriggerCauseEvent() == 'true')
+                    if (getTriggerCauseEvent.getTriggerCauseEvent() == 'true') {
                         println 'enabling unit testing'    
+                    }
                 }
             }    
         }        
         stage('second conditional stage') {
             container('maven') {
                 stage('disable unit testing when event is dev') {
-                    if (getTriggerCauseEvent.getTriggerCauseEvent() == 'false')
+                    if (getTriggerCauseEvent.getTriggerCauseEvent() == 'false') {
                         println 'user disabled unit testing'
+                    }
                 }
             }    
         }    
