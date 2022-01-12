@@ -43,7 +43,6 @@ podTemplate(containers: [
         }        
         stage('test') {
             container('maven') {
-                git 'https://github.com/dylanmeh/Lab2_Java-App.git'
                 stage('test') {
                     sh 'mvn test'
                 }
@@ -51,7 +50,6 @@ podTemplate(containers: [
         }
         stage('junit test') {
             container('maven') {
-                git 'https://github.com/dylanmeh/Lab2_Java-App.git'
                 stage('junit test') {
                     junit 'target/surefire-reports/*.xml'
                 }
@@ -59,7 +57,6 @@ podTemplate(containers: [
         }
         stage('deploy') {
             container('maven') {
-                git 'https://github.com/dylanmeh/Lab2_Java-App.git'
                 stage('deploy') {
                     sh './scripts/deliver.sh'
                 }           
