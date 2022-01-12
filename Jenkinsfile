@@ -1,8 +1,20 @@
 @Library("lab3") _ 
 properties([pipelineTriggers([eventTrigger(jmespathQuery("labs[*].lab"))])])
-podTemplate(containers: [
-    containerTemplate(name: 'maven', image: 'maven:3.8.1-jdk-11', command: 'sleep', args: '99d')
-]) {
+podTemplate(yaml: '''
+    apiVersion: v1
+    kind: Pod
+    metadata:
+        labels:
+            some-label: some-label-value
+    podRention: onFailure()
+    activeDeadlineSeconds: 300
+    spec:
+        containers:
+        - name: 'maven'
+          image: 'maven:3.8.1-jdk-11'
+          command: 'sleep'
+          args: '99d'
+    ''') {      
     node(POD_LABEL) {
         stage('SCM Checkout') {
             git url: 'https://github.com/dylanmeh/Lab6_1-10.git', branch: 'main'
