@@ -5,7 +5,7 @@ podTemplate(containers: [
 ]) {
     node(POD_LABEL) {
         stage('SCM Checkout') {
-            git url: 'https://github.com/dylanmeh/Lab6_1-10.git', branch: 'main'
+            checkout scm
 
         }
         stage('first conditional stage') {
@@ -35,7 +35,6 @@ podTemplate(containers: [
         }
         stage('build') {
             container('maven') {
-                git 'https://github.com/dylanmeh/Lab2_Java-App.git'
                 stage('build') {
                     sh 'mvn -B -DskipTests clean package'
                 }
